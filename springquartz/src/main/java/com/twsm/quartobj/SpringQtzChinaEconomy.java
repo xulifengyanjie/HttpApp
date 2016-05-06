@@ -42,7 +42,7 @@ public class SpringQtzChinaEconomy {
 	@Test
 	public void jobChinaEconomy() throws UnknownHostException, IOException,
 			DocumentException {
-		System.out.println("中国经济网移动客户端抓取任务开始");
+		System.out.println("中国经济网移动客户端抓取任务开始......");
 		List<Map<String, String>> dataLists = new ArrayList<Map<String, String>>();
 		Document doc = null;
 		Set<String> key = map.keySet();

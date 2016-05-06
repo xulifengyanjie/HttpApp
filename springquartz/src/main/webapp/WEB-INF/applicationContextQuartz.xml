@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns:aop="http://www.springframework.org/schema/aop"
+         xmlns:tx="http://www.springframework.org/schema/tx"
+         xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd
+           http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.0.xsd">
+
+
+	<!-- 方式二：使用MethodInvokingJobDetailFactoryBean，任务类可以不实现Job接口，通过targetMethod指定调用方法-->
+	<!-- 定义目标bean和bean中的方法 -->
+	<bean id="quartNetease" class="com.twsm.quartobj.SpringQtzNetease" />
+	<bean id="quartQq" class="com.twsm.quartobj.SpringQtzQq" />
+	<bean id="quartChinaEconomy"
+		class="com.twsm.quartobj.SpringQtzChinaEconomy" />
+	<bean id="quartFenghuang"
+		class="com.twsm.quartobj.SpringQtzFenghuang" />
+	<bean id="quartSohu" class="com.twsm.quartobj.SpringQtzSohu" />
+	<bean id="quartToutiao" class="com.twsm.quartobj.SpringQtzToutiao" />
+	<bean id="quartXinhua" class="com.twsm.quartobj.SpringQtzXinhua" />
+	<bean id="quartYangshi" class="com.twsm.quartobj.SpringQtzYangshi" />
+	<bean id="quartPeople" class="com.twsm.quartobj.SpringQtzPeople" />
+	<bean id="quartJingjiribao" class="com.twsm.quartobj.SpringQtzJingjiribao" />
+	<bean id="SpringQtzJobMethod"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="quartNetease" />
+		</property>
+		<property name="targetMethod"><!-- 要执行的方法名称 -->
+			<value>jobNetease</value>
+		</property>
+	</bean>
+
+	<bean id="SpringQtzJobMethod1"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="quartQq" />
+		</property>
+		<property name="targetMethod"><!-- 要执行的方法名称 -->
+			<value>jobQq</value>
+		</property>
+	</bean>
+
+	<bean id="SpringQtzJobMethod2"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="quartChinaEconomy" />
+		</property>
+		<property name="targetMethod"><!-- 要执行的方法名称 -->
+			<value>jobChinaEconomy</value>
+		</property>
+	</bean>
+
+	<bean id="SpringQtzJobMethod3"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="quartFenghuang" />
+		</property>
+		<property name="targetMethod"><!-- 要执行的方法名称 -->
+			<value>jobFenghuang</value>
+		</property>
+	</bean>
+
+	<bean id="SpringQtzJobMethod4"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="quartSohu" />
+		</property>
+		<property name="targetMethod"><!-- 要执行的方法名称 -->
+			<value>jobSohu</value>
+		</property>
+	</bean>
+
+	<bean id="SpringQtzJobMethod5"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="quartToutiao" />
+		</property>
+		<property name="targetMethod"><!-- 要执行的方法名称 -->
+			<value>jobToutiao</value>
+		</property>
+	</bean>
+
+	<bean id="SpringQtzJobMethod6"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="quartXinhua" />
+		</property>
+		<property name="targetMethod"><!-- 要执行的方法名称 -->
+			<value>jobXinhua</value>
+		</property>
+	</bean>
+
+	<bean id="SpringQtzJobMethod7"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="quartYangshi" />
+		</property>
+		<property name="targetMethod"><!-- 要执行的方法名称 -->
+			<value>jobYangshi</value>
+		</property>
+	</bean>
+	
+	<bean id="SpringQtzJobMethod8"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="quartPeople" />
+		</property>
+		<property name="targetMethod"><!-- 要执行的方法名称 -->
+			<value>jobPeople</value>
+		</property>
+	</bean>
+	
+	<bean id="SpringQtzJobMethod9"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="quartJingjiribao" />
+		</property>
+		<property name="targetMethod"><!-- 要执行的方法名称 -->
+			<value>jobJingjiribao</value>
+		</property>
+	</bean>
+
+	<!-- ======================== 调度触发器 ======================== -->
+	<!-- 触发器：定义触发规则 -->
+	<bean id="synJob"
+		class="org.springframework.scheduling.quartz.SimpleTriggerBean">
+		<property name="jobDetail">
+			<ref local="SpringQtzJobMethod" />
+		</property>
+		<property name="startDelay">
+			<!-- 服务启动一分钟后执行  1*1000*60-->
+			<value>60000</value>
+		</property>
+		<property name="repeatInterval">
+			<!-- 每隔15分钟执行一次-->
+			<value>900000</value>
+		</property>
+	</bean>
+
+	<bean id="synJob1"
+		class="org.springframework.scheduling.quartz.SimpleTriggerBean">
+		<property name="jobDetail">
+			<ref local="SpringQtzJobMethod1" />
+		</property>
+		<property name="startDelay">
+			<!-- 服务启动一分钟后执行  1*1000*60-->
+			<value>60000</value>
+		</property>
+		<property name="repeatInterval">
+			<!-- 每隔15分钟执行一次-->
+			<value>900000</value>
+		</property>
+	</bean>
+
+	<bean id="synJob2"
+		class="org.springframework.scheduling.quartz.SimpleTriggerBean">
+		<property name="jobDetail">
+			<ref local="SpringQtzJobMethod2" />
+		</property>
+		<property name="startDelay">
+			<!-- 服务启动一分钟后执行  1*1000*60-->
+			<value>60000</value>
+		</property>
+		<property name="repeatInterval">
+			<!-- 每隔15分钟执行一次-->
+			<value>900000</value>
+		</property>
+	</bean>
+
+	<bean id="synJob3"
+		class="org.springframework.scheduling.quartz.SimpleTriggerBean">
+		<property name="jobDetail">
+			<ref local="SpringQtzJobMethod3" />
+		</property>
+		<property name="startDelay">
+			<!-- 服务启动一分钟后执行  1*1000*60-->
+			<value>60000</value>
+		</property>
+		<property name="repeatInterval">
+			<!-- 每隔15分钟执行一次-->
+			<value>900000</value>
+		</property>
+	</bean>
+
+	<bean id="synJob4"
+		class="org.springframework.scheduling.quartz.SimpleTriggerBean">
+		<property name="jobDetail">
+			<ref local="SpringQtzJobMethod4" />
+		</property>
+		<property name="startDelay">
+			<!-- 服务启动一分钟后执行  1*1000*60-->
+			<value>60000</value>
+		</property>
+		<property name="repeatInterval">
+			<!-- 每隔15分钟执行一次-->
+			<value>900000</value>
+		</property>
+	</bean>
+
+	<bean id="synJob5"
+		class="org.springframework.scheduling.quartz.SimpleTriggerBean">
+		<property name="jobDetail">
+			<ref local="SpringQtzJobMethod5" />
+		</property>
+		<property name="startDelay">
+			<!-- 服务启动一分钟后执行  1*1000*60-->
+			<value>60000</value>
+		</property>
+		<property name="repeatInterval">
+			<!-- 每隔15分钟执行一次-->
+			<value>900000</value>
+		</property>
+	</bean>
+
+	<bean id="synJob6"
+		class="org.springframework.scheduling.quartz.SimpleTriggerBean">
+		<property name="jobDetail">
+			<ref local="SpringQtzJobMethod6" />
+		</property>
+		<property name="startDelay">
+			<!-- 服务启动一分钟后执行  1*1000*60-->
+			<value>60000</value>
+		</property>
+		<property name="repeatInterval">
+			<!-- 每隔15分钟执行一次-->
+			<value>900000</value>
+		</property>
+	</bean>
+
+	<bean id="synJob7"
+		class="org.springframework.scheduling.quartz.SimpleTriggerBean">
+		<property name="jobDetail">
+			<ref local="SpringQtzJobMethod7" />
+		</property>
+		<property name="startDelay">
+			<!-- 服务启动一分钟后执行  1*1000*60-->
+			<value>60000</value>
+		</property>
+		<property name="repeatInterval">
+			<!-- 每隔15分钟执行一次-->
+			<value>900000</value>
+		</property>
+	</bean>
+	
+	<bean id="synJob8"
+		class="org.springframework.scheduling.quartz.SimpleTriggerBean">
+		<property name="jobDetail">
+			<ref local="SpringQtzJobMethod8" />
+		</property>
+		<property name="startDelay">
+			<!-- 服务启动一分钟后执行  1*1000*60-->
+			<value>60000</value>
+		</property>
+		<property name="repeatInterval">
+			<!-- 每隔15分钟执行一次-->
+			<value>900000</value>
+		</property>
+	</bean>
+	
+	<bean id="synJob9"
+		class="org.springframework.scheduling.quartz.SimpleTriggerBean">
+		<property name="jobDetail">
+			<ref local="SpringQtzJobMethod9" />
+		</property>
+		<property name="startDelay">
+			<!-- 服务启动一分钟后执行  1*1000*60-->
+			<value>60000</value>
+		</property>
+		<property name="repeatInterval">
+			<!-- 每隔15分钟执行一次-->
+			<value>900000</value>
+		</property>
+	</bean>
+
+	<!-- ======================== 调度工厂 ======================== -->
+	<bean id="SpringJobSchedulerFactoryBean"
+		class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="triggers">
+			<list>
+				<ref bean="synJob" />
+				<ref bean="synJob1" />
+				<ref bean="synJob2" />
+				<ref bean="synJob3" />
+				<ref bean="synJob4" />
+				<ref bean="synJob5" />
+				<ref bean="synJob6" />
+				<ref bean="synJob7" />
+				<ref bean="synJob8" />
+				<ref bean="synJob9" />
+			</list>
+		</property>
+	</bean>
+</beans>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMapConfig      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map Config 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-config-2.dtd">
+
+<sqlMapConfig>
+	<settings cacheModelsEnabled="true" enhancementEnabled="true" lazyLoadingEnabled="true" maxRequests="150" maxSessions="100" maxTransactions="50" useStatementNamespaces="true" />
+    <transactionManager type="JDBC" commitRequired="false">
+		<dataSource type="C3P0">
+			
+            <property name="JDBC.Driver" value="com.mysql.jdbc.Driver" /> 
+			<!--<property name="JDBC.Driver" value="com.p6spy.engine.spy.P6SpyDriver" />-->
+			<property name="JDBC.ConnectionURL" value="jdbc:mysql://192.168.118.102:3306/weibo?useUnicode=true&amp;characterEncoding=gbk"/>
+			<property name="JDBC.Username" value="root" />
+			<property name="JDBC.Password" value="teewon" />
+			
+			<property name="Pool.PingEnabled" value="true"/>
+		    <property name="Pool.PingConnectionsOlderThan" value="0"/>
+		    <property name="Pool.PingConnectionsNotUsedFor" value="3600000"/> 
+			 
+		</dataSource>
+	</transactionManager>
+        <sqlMap resource="com/twsm/mysqlmap/MobappNews.xml"/>
+
+</sqlMapConfig>

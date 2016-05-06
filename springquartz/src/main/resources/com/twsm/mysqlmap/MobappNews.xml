@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" 
+        "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="MobappNews">
+	<resultMap class="com.twsm.dto.MobappNews" id="mobappNews">
+		<result column="id" property="id" jdbcType="INT"/>
+		<result column="news_id" property="newsId" jdbcType="VARCHAR"/>
+		<result column="title" property="title" jdbcType="VARCHAR"/>
+		<result column="news_text" property="newsText" jdbcType="VARCHAR"/>
+		<result column="pub_time" property="pubTime" jdbcType="VARCHAR"/>
+		<result column="surl" property="surl" jdbcType="VARCHAR"/>
+		<result column="source" property="source" jdbcType="VARCHAR"/>
+		<result column="app_name" property="appName" jdbcType="VARCHAR"/>
+		<result column="column_name" property="columnName" jdbcType="VARCHAR"/>
+		<result column="imgsrc" property="imgsrc" jdbcType="VARCHAR"/>
+		<result column="add_time" property="addTime" jdbcType="VARCHAR"/>
+	</resultMap>
+		<sql id="whereCondition">
+		<dynamic>
+			<isNotEmpty prepend="AND" property="newsId">
+				news_id=#newsId#
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="source">
+				source=#source#
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="appName">
+				app_name=#appName#
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="columnName">
+				column_name=#columnName#
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="title">
+				title = #title#
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="newsText">
+				news_text LIKE '%$newsText$%'
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="tusername">
+				tUserName=#tusername#
+			</isNotEmpty>
+		    <isNotEmpty prepend="AND" property="startTime">				
+			    pub_time &gt;= #startTime#
+		    </isNotEmpty>
+		    <isNotEmpty prepend="AND" property="endTime">				
+			   pub_time &lt;= #endTime#
+		    </isNotEmpty>
+		</dynamic>
+	</sql>
+	<select id="getById" resultMap="mobappNews" parameterClass="Integer">
+		SELECT 
+			id,
+			news_id,
+			title,
+			news_text,
+			pub_time,
+			surl,
+			source,
+			app_name,
+			column_name,
+			imgsrc,
+			add_time 
+		FROM 
+			mobapp_news
+		WHERE id = #id#
+	</select>
+	<select id="getCount" resultClass="int" parameterClass="map">
+		SELECT 
+		   COUNT(1) 
+		FROM 
+		   mobapp_news
+		WHERE 
+		   1 = 1 <include refid="whereCondition"/>
+	</select>
+	<select id="getByPage" parameterClass="map" resultClass="Integer">
+	    SELECT 
+		   id
+		FROM 
+		   mobapp_news
+        WHERE 1=1 
+        	<include refid="whereCondition"/>
+        	ORDER BY id DESC
+        LIMIT #start#,#end#
+	</select>
+	<select id="getByWhere" resultClass="Integer" parameterClass="map">
+		SELECT 
+			id
+		FROM mobapp_news
+		WHERE 1 = 1
+		<include refid="whereCondition"/>
+		ORDER BY id DESC
+	</select>
+	<update id="update" parameterClass="com.twsm.dto.MobappNews">
+	      UPDATE mobapp_news
+	      <dynamic prepend="set">
+			news_id=#newsId#,
+			title=#title#,
+			news_text=#newsText#,
+			pub_time=#pubTime#,
+			surl=#surl#,
+			source=#source#,
+			app_name=#appName#,
+			column_name=#columnName#,
+			imgsrc=#imgsrc#,
+			add_time=#addTime#
+         	</dynamic>
+         WHERE id = #id#
+	</update>	
+	<insert id="insert" parameterClass="com.twsm.dto.MobappNews">
+		<!-- <selectKey keyProperty="" resultClass="int" type="pre">
+			SELECT sequence/function FROM DUAL
+		</selectKey> -->
+		INSERT INTO mobapp_news(
+			news_id,
+			title,
+			news_text,
+			pub_time,
+			surl,
+			source,
+			app_name,
+			column_name,
+			imgsrc,
+			add_time
+			)
+		VALUES(
+			#newsId#,
+			#title#,
+			#newsText#,
+			#pubTime#,
+			#surl#,
+			#source#,
+			#appName#,
+			#columnName#,
+			#imgsrc#,
+			#addTime#
+			)
+		<selectKey resultClass="int" keyProperty="id">
+			SELECT LAST_INSERT_ID();
+		</selectKey>		
+	</insert>
+	<delete id="delete" parameterClass="Integer">
+		DELETE FROM mobapp_news WHERE id = #id#
+	</delete>	
+</sqlMap>

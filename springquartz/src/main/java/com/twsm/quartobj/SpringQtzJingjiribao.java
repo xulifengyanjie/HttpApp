@@ -74,6 +74,7 @@ public class SpringQtzJingjiribao {
 				JSONObject object = jsonArrayNewsList.getJSONObject(i);
 				Map<String, String> tempHashMap = new HashMap<String, String>();
 				tempHashMap.put("tag", "app");
+				tempHashMap.put("type", "10");
 				tempHashMap.put("column_name", s);
 				tempHashMap.put("app_name", "经济日报");
 				tempHashMap.put("source", object.getString("source"));

@@ -89,6 +89,7 @@ public class SpringQtzXinhua {
 			JSONObject jb2 = new JSONObject(jsonArray.get(i).toString());
 			Map<String, String> tempHashMap = new HashMap<String, String>();
 			tempHashMap.put("tag", "app");
+			tempHashMap.put("type", "10");
 			tempHashMap.put("column_name", "财经");
 			tempHashMap.put("app_name", "新华炫闻");
 			tempHashMap.put("title", jb2.getString("title"));
@@ -151,6 +152,7 @@ public class SpringQtzXinhua {
 			JSONObject jb2 = new JSONObject(jsonArray.get(i).toString());
 			Map<String, String> tempHashMap = new HashMap<String, String>();
 			tempHashMap.put("tag", "app");
+			tempHashMap.put("type", "10");
 			tempHashMap.put("column_name", "社会");
 			tempHashMap.put("app_name", "新华炫闻");
 			tempHashMap.put("title", jb2.getString("title"));
@@ -212,6 +214,7 @@ public class SpringQtzXinhua {
 			JSONObject jb2 = new JSONObject(jsonArray.get(i).toString());
 			Map<String, String> tempHashMap = new HashMap<String, String>();
 			tempHashMap.put("tag", "app");
+			tempHashMap.put("type", "10");
 			tempHashMap.put("column_name", "时政");
 			tempHashMap.put("app_name", "新华炫闻");
 			tempHashMap.put("title", jb2.getString("title"));
@@ -274,6 +277,7 @@ public class SpringQtzXinhua {
 			JSONObject jb2 = new JSONObject(jsonArray.get(i).toString());
 			Map<String, String> tempHashMap = new HashMap<String, String>();
 			tempHashMap.put("tag", "app");
+			tempHashMap.put("type", "10");
 			tempHashMap.put("column_name", "军事");
 			tempHashMap.put("app_name", "新华炫闻");
 			tempHashMap.put("title", jb2.getString("title"));

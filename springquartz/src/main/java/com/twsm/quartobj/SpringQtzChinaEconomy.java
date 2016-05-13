@@ -61,6 +61,7 @@ public class SpringQtzChinaEconomy {
 					Element e1 = eName.element("a");
 					Map<String, String> tempHashMap = new HashMap<String, String>();
 					tempHashMap.put("tag", "app");
+					tempHashMap.put("type", "10");
 					tempHashMap.put("column_name", s);
 					tempHashMap.put("app_name", "中国经济网");
 					tempHashMap.put("source", itemNodeEle

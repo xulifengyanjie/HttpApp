@@ -84,6 +84,7 @@ public class SpringQtzPeople {
 				
 							Map<String,String> tempHashMap = new HashMap<String, String>();
 							tempHashMap.put("tag", "app");
+							tempHashMap.put("type", "10");
 							tempHashMap.put("title", jsonObjectTemp
 									.getString("title"));
 							tempHashMap.put("column_name", s);

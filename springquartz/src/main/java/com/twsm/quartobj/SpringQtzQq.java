@@ -76,6 +76,7 @@ public class SpringQtzQq {
 				JSONObject object = newListsArray.getJSONObject(i);
 				Map<String, String> tempHashMap = new HashMap<String, String>();
 				tempHashMap.put("tag", "app");
+				tempHashMap.put("type", "10");
 				tempHashMap.put("column_name", s);
 				tempHashMap.put("app_name", "腾讯新闻");
 				tempHashMap.put("id", object.getString("id"));

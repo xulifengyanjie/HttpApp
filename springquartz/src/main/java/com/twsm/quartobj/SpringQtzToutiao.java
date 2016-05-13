@@ -73,6 +73,7 @@ public class SpringQtzToutiao {
 				JSONObject object = jsonArray.getJSONObject(i);
 				Map<String, String> tempHashMap = new HashMap<String, String>();
 				tempHashMap.put("tag", "app");
+				tempHashMap.put("type", "10");
 				tempHashMap.put("column_name", s);
 				tempHashMap.put("app_name", "今日头条");
 				tempHashMap.put("title", object.getString("title"));

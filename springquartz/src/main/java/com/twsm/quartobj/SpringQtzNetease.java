@@ -64,6 +64,7 @@ public class SpringQtzNetease {
 				JSONObject object = newListsArray.getJSONObject(i);
 				Map<String, String> tempHashMap = new HashMap<String, String>();
 				tempHashMap.put("tag", "app");
+				tempHashMap.put("type", "10");
 				tempHashMap.put("column_name", s);
 				tempHashMap.put("app_name", "网易新闻");
 				// if (object.has("replyCount")) {

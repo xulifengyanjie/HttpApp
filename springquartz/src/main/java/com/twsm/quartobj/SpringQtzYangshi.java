@@ -68,6 +68,7 @@ public class SpringQtzYangshi {
 				JSONObject object = jsonArray.getJSONObject(i);
 				Map<String, String> tempHashMap = new HashMap<String, String>();
 				tempHashMap.put("tag", "app");
+				tempHashMap.put("type", "10");
 				tempHashMap.put("column_name", s);
 				tempHashMap.put("app_name", "央视新闻");
 				JSONObject jb2 = JSONObject.fromObject(jsonArray.getJSONObject(
